@@ -31,7 +31,7 @@ The SPA prioritizes user understanding and ease of navigation through a well-des
 
 ## How to View
 
-You can view the live interactive report on GitHub Pages [here](https://saswata-bhattacharya.github.io/ai-agent-strategy/).
+You can view the live interactive report on GitHub Pages [here](https://saswata-bhattacharya.github.io/ai-test-strategy/). 
 
 Alternatively, you can clone this repository and open the `index.html` file directly in your web browser.
 
