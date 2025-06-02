@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Report: Salesforce Agentforce AI Test Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #007bff;
+            border-bottom-color: #007bff;
+        }
+        .section-title {
+            font-weight: 600;
+            color: #495057;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #007bff;
+            border-radius: 2px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .tab-button {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-gray-800">AI Test Strategy</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="nav-link px-3 py-2 text-sm font-medium text-gray-600">Home</a>
+                        <a href="#strategy" class="nav-link px-3 py-2 text-sm font-medium text-gray-600">Strategy</a>
+                        <a href="#guardrails" class="nav-link px-3 py-2 text-sm font-medium text-gray-600">Guardrails</a>
+                        <a href="#challenges" class="nav-link px-3 py-2 text-sm font-medium text-gray-600">Challenges</a>
+                        <a href="#testplan" class="nav-link px-3 py-2 text-sm font-medium text-gray-600">Test Plan</a>
+                        <a href="#kpis" class="nav-link px-3 py-2 text-sm font-medium text-gray-600">KPIs</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">Ensuring Reliable & Ethical AI Agents</h2>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-600">This interactive report outlines a robust, end-to-end testing strategy for Salesforce Agentforce AI agents. Its purpose is to ensure their reliability, ethical performance, and high efficacy in customer service operations by integrating traditional testing with specialized AI validation methodologies.</p>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-bold text-blue-600">>95%</h3>
+                        <p class="mt-2 text-gray-600">Target Accuracy Rate for critical tasks, ensuring correct outcomes and task completion.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-bold text-blue-600">< 2s</h3>
+                        <p class="mt-2 text-gray-600">Target Average Latency for AI responses, ensuring a seamless user experience.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-2xl font-bold text-blue-600">>70%</h3>
+                        <p class="mt-2 text-gray-600">Target First Contact Resolution, resolving most issues in the first interaction.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-3xl font-bold text-center mb-4">Core Test Strategy</h2>
+                <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">The strategy is built on a layered approach, combining established software testing levels with specialized AI-specific testing types. This ensures comprehensive coverage from individual components to the complete, user-facing system.</p>
+                
+                <div class="card p-6 md:p-8">
+                    <div class="mb-8">
+                        <div class="flex justify-center border-b border-gray-200">
+                            <button class="tab-button active px-4 py-2 text-sm font-medium" data-tab="levels">Testing Levels</button>
+                            <button class="tab-button px-4 py-2 text-sm font-medium" data-tab="types">Testing Types</button>
+                        </div>
+                    </div>
+
+                    <div id="levelsContent" class="tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">Unit Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Validates isolated components, like a chatbot's intent recognition module, to fine-tune individual functionalities before integration.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">Integration Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Checks data flows between the AI model, CRM, and external APIs, ensuring the entire ecosystem functions cohesively.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">System Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Verifies the complete, integrated AI application against all specified requirements for end-to-end functionality and reliability.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">UAT</h4>
+                                <p class="text-sm text-gray-600 mt-1">Assesses real-world interactions from an end-user perspective, ensuring the agent aligns with business goals and user expectations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="typesContent" class="tab-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">Functional Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Ensures the agent performs its intended tasks correctly, including language understanding and contextual relevance.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">Performance Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Evaluates speed, efficiency, and resource use (latency, cost, tokens) under various loads.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">Security Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Identifies vulnerabilities and prevents data leaks, ensuring compliance with privacy policies like GDPR.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">Adversarial Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Uses malicious or extreme inputs to identify weaknesses that could be exploited by bad actors.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">Bias/Fairness Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Applies demographic analysis and stress tests to identify and counteract algorithmic biases.</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-lg text-gray-800">Robustness Testing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Measures how well the agent maintains performance under unexpected or adverse conditions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guardrails" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-3xl font-bold text-center mb-4">AI Guardrails</h2>
+                <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">Testing AI guardrails is essential for ensuring agents behave ethically, safely, and within predefined boundaries. This proactive approach addresses risks throughout the AI lifecycle, from data preparation to post-deployment monitoring.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card p-6">
+                        <h3 class="font-bold text-xl text-gray-800">Bias & Fairness</h3>
+                        <p class="text-sm text-gray-600 mt-2">Detect and mitigate bias in AI decision-making across demographic groups to ensure outcomes are fair and non-discriminatory.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-bold text-xl text-gray-800">Hallucination & Misinformation</h3>
+                        <p class="text-sm text-gray-600 mt-2">Identify and filter out AI-generated false or misleading content using fact-checking and verification to ensure accuracy.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-bold text-xl text-gray-800">Security & Adversarial Testing</h3>
+                        <p class="text-sm text-gray-600 mt-2">Evaluate models for vulnerabilities like prompt injection and data poisoning to prevent malicious manipulation.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-bold text-xl text-gray-800">Toxicity & Content Moderation</h3>
+                        <p class="text-sm text-gray-600 mt-2">Use AI-driven filters to prevent the generation of harmful, offensive, or inappropriate content, protecting brand reputation.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-bold text-xl text-gray-800">Regulations & Compliance</h3>
+                        <p class="text-sm text-gray-600 mt-2">Automate AI compliance checks against industry standards like GDPR, HIPAA, and the EU AI Act to avoid legal consequences.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-bold text-xl text-gray-800">Transparency & Explainability</h3>
+                        <p class="text-sm text-gray-600 mt-2">Ensure the reasoning behind AI agent decisions can be understood and communicated, respecting data provenance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="challenges" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-3xl font-bold text-center mb-4">Unique AI Testing Challenges</h2>
+                 <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">Testing AI agents is fundamentally different from traditional software testing. The following challenges require specialized mitigation strategies to ensure a trustworthy and reliable system. Click on a challenge to see how we address it.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="challenge-card card p-6 cursor-pointer">
+                        <h3 class="font-bold text-xl text-gray-800">Non-determinism</h3>
+                        <p class="text-sm text-gray-600 mt-2">AI outputs can vary for the same input, making bugs hard to reproduce.</p>
+                        <div class="mitigation hidden mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-semibold text-blue-800">Mitigation:</h5>
+                            <p class="text-sm text-blue-700">Focus on probabilistic metrics, define ranges of acceptable outputs, and use human-in-the-loop validation for nuanced assessment.</p>
+                        </div>
+                    </div>
+                    <div class="challenge-card card p-6 cursor-pointer">
+                        <h3 class="font-bold text-xl text-gray-800">Data Quality & Bias</h3>
+                        <p class="text-sm text-gray-600 mt-2">Models can amplify biases present in their training data, leading to unfair outcomes.</p>
+                        <div class="mitigation hidden mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-semibold text-blue-800">Mitigation:</h5>
+                            <p class="text-sm text-blue-700">Implement rigorous data-centric testing, use diverse and representative datasets, and conduct dedicated fairness checks.</p>
+                        </div>
+                    </div>
+                    <div class="challenge-card card p-6 cursor-pointer">
+                        <h3 class="font-bold text-xl text-gray-800">Black Box Problem</h3>
+                        <p class="text-sm text-gray-600 mt-2">Limited insight into the internal workings of complex models makes debugging difficult.</p>
+                        <div class="mitigation hidden mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-semibold text-blue-800">Mitigation:</h5>
+                            <p class="text-sm text-blue-700">Leverage Explainable AI (XAI) frameworks (e.g., LIME, SHAP) and focus on behavioral, outcome-based testing.</p>
+                        </div>
+                    </div>
+                    <div class="challenge-card card p-6 cursor-pointer">
+                        <h3 class="font-bold text-xl text-gray-800">Ethical Implications</h3>
+                        <p class="text-sm text-gray-600 mt-2">Risk of harmful outputs or sensitive data leakage can erode user trust and cause legal issues.</p>
+                        <div class="mitigation hidden mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-semibold text-blue-800">Mitigation:</h5>
+                            <p class="text-sm text-blue-700">Integrate "Ethics by Design," conduct thorough privacy testing, implement content moderation, and ensure regulatory compliance.</p>
+                        </div>
+                    </div>
+                    <div class="challenge-card card p-6 cursor-pointer">
+                        <h3 class="font-bold text-xl text-gray-800">Adversarial Attacks</h3>
+                        <p class="text-sm text-gray-600 mt-2">Malicious inputs can be crafted to exploit vulnerabilities and manipulate agent behavior.</p>
+                        <div class="mitigation hidden mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-semibold text-blue-800">Mitigation:</h5>
+                            <p class="text-sm text-blue-700">Conduct adversarial testing with varied and extreme inputs, and implement robust input validation and sanitization.</p>
+                        </div>
+                    </div>
+                    <div class="challenge-card card p-6 cursor-pointer">
+                        <h3 class="font-bold text-xl text-gray-800">Catastrophic Forgetting</h3>
+                        <p class="text-sm text-gray-600 mt-2">Continuous learning can cause new training data to overwrite previously learned knowledge.</p>
+                        <div class="mitigation hidden mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <h5 class="font-semibold text-blue-800">Mitigation:</h5>
+                            <p class="text-sm text-blue-700">Use replay-based learning, parameter regularization, or Retrieval Augmented Generation (RAG) to preserve existing knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testplan" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-3xl font-bold text-center mb-4">Release Test Plan: Q3 2024</h2>
+                <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">This example plan focuses on enhancing order management and adding new product support. It details the scope, objectives, and test execution phases, illustrating how the strategy is applied to a specific release.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card p-6">
+                        <h3 class="font-semibold text-xl mb-4 text-gray-800">Scope & Objectives</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium text-green-700">In Scope:</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-600 mt-1">
+                                    <li>New "Returns & Exchanges" actions</li>
+                                    <li>Enhanced "Order Modification" capabilities</li>
+                                    <li>New "Device Troubleshooting" topic</li>
+                                    <li>Integration with inventory & shipping APIs</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-red-700">Out of Scope:</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-600 mt-1">
+                                    <li>Existing, unaffected AI functionalities</li>
+                                    <li>Underlying platform infrastructure changes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-semibold text-xl mb-4 text-gray-800">Phased Test Execution</h3>
+                        <ol class="relative border-l border-gray-200">
+                            <li class="mb-6 ml-4">
+                                <div class="absolute w-3 h-3 bg-gray-300 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                                <h4 class="text-lg font-semibold text-gray-800">Phase 1: Automated Unit & Integration</h4>
+                                <p class="text-sm text-gray-600">Run continuously in CI/CD pipelines for early issue detection.</p>
+                            </li>
+                            <li class="mb-6 ml-4">
+                                <div class="absolute w-3 h-3 bg-gray-300 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                                <h4 class="text-lg font-semibold text-gray-800">Phase 2: Automated System & Regression</h4>
+                                <p class="text-sm text-gray-600">Execute comprehensive suites (including AI-generated cases) to validate end-to-end functionality.</p>
+                            </li>
+                            <li class="mb-6 ml-4">
+                                <div class="absolute w-3 h-3 bg-gray-300 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                                <h4 class="text-lg font-semibold text-gray-800">Phase 3: Manual & Human Validation</h4>
+                                <p class="text-sm text-gray-600">Exploratory testing and human-in-the-loop review to assess nuanced responses and find edge cases.</p>
+                            </li>
+                            <li class="ml-4">
+                                <div class="absolute w-3 h-3 bg-gray-300 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                                <h4 class="text-lg font-semibold text-gray-800">Phase 4: Performance, Security & UAT</h4>
+                                <p class="text-sm text-gray-600">Dedicated load testing, adversarial checks, and final sign-off from business stakeholders.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kpis" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-3xl font-bold text-center mb-4">KPI Dashboard</h2>
+                <p class="max-w-3xl mx-auto text-center text-gray-600 mb-12">Success is measured by a hybrid of traditional and AI-specific KPIs. This dashboard visualizes key metrics across Accuracy, Efficiency, and User Experience, providing a clear view of agent performance.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card p-6">
+                        <h3 class="font-semibold text-xl mb-4 text-center text-gray-800">Agent Accuracy & Resolution</h3>
+                        <div class="chart-container">
+                            <canvas id="accuracyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-semibold text-xl mb-4 text-center text-gray-800">Agent Efficiency Metrics</h3>
+                        <div class="chart-container">
+                            <canvas id="efficiencyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                 <div class="mt-8 text-center">
+                    <p class="text-sm text-gray-500">Other tracked KPIs include User Experience (CSAT, NPS), Ethical performance (Bias Score), and Cost per Interaction.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-800">
+        <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-400 text-sm">
+            <p>&copy; 2024 Interactive AI Test Strategy Report. A comprehensive approach to quality assurance.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const challengeCards = document.querySelectorAll('.challenge-card');
+            challengeCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const mitigation = card.querySelector('.mitigation');
+                    mitigation.classList.toggle('hidden');
+                });
+            });
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const tab = button.dataset.tab;
+                    tabContents.forEach(content => {
+                        if(content.id === `${tab}Content`) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            const accuracyData = {
+                labels: ['Success Rate (Critical)', 'First Contact Resolution'],
+                datasets: [{
+                    label: 'Performance (%)',
+                    data: [95, 70],
+                    backgroundColor: ['rgba(54, 162, 235, 0.6)', 'rgba(75, 192, 192, 0.6)'],
+                    borderColor: ['rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)'],
+                    borderWidth: 1
+                }]
+            };
+
+            const accuracyCtx = document.getElementById('accuracyChart').getContext('2d');
+            new Chart(accuracyCtx, {
+                type: 'bar',
+                data: accuracyData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.x + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            const efficiencyData = {
+                labels: ['Fully Automated', 'Human Intervention'],
+                datasets: [{
+                    label: 'Automation/Containment Rate',
+                    data: [60, 40],
+                    backgroundColor: ['rgba(255, 159, 64, 0.6)', 'rgba(201, 203, 207, 0.6)'],
+                    borderColor: ['rgba(255, 159, 64, 1)', 'rgba(201, 203, 207, 1)'],
+                    borderWidth: 1
+                }]
+            };
+
+            const efficiencyCtx = document.getElementById('efficiencyChart').getContext('2d');
+            new Chart(efficiencyCtx, {
+                type: 'doughnut',
+                data: efficiencyData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Automation Rate'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
